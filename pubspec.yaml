@@ -30,7 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.4.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -63,6 +64,7 @@ flutter:
     - lib/Assets/Screenshot 2023-11-21 232836.png
     - lib/Assets/google-removebg-preview.png
     - lib/Assets/gmail-removebg-preview.png
+    - lib/Assets/image-removebg-preview.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

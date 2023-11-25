@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "282004418240",
+    "project_id": "geeklearn-15250",
+    "storage_bucket": "geeklearn-15250.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282004418240:android:630a788a3806865fc2c725",
+        "android_client_info": {
+          "package_name": "com.example.geek"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQlh4WyRML-1r-ayOrM8M3ltVXyKMSeYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

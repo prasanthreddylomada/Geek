@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geek/HomePage.dart';
 import 'package:geek/SignupPage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,6 +16,13 @@ class _LoginPageState extends State<LoginPage> {
   void _login() {
     // Perform login logic here
     print('Username: ${_usernameController.text}, Password: ${_passwordController.text}');
+  }
+
+  void _navigateToHome(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
   }
 
   void _navigateToSignup(BuildContext context) {
@@ -105,7 +113,9 @@ class _LoginPageState extends State<LoginPage> {
                   Icons.arrow_forward,
                   size: 36.0,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  _navigateToHome(context);
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromRGBO(156, 191, 96, 1),
                   onPrimary: Colors.white,
