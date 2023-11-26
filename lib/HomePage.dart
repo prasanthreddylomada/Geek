@@ -12,11 +12,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Map<String, String>> allCourses = [
-    {'name': 'Course 1', 'duration': '2 hours'},
-    {'name': 'Course 2', 'duration': '3 hours'},
-    {'name': 'Course 3', 'duration': '1.5 hours'},
-    {'name': 'Course 4', 'duration': '4 hours'},
-    {'name': 'Information', 'duration': '2.5 hours'},
+    {'name': 'Course 1', 'duration': '2 hours', 'image' : 'lib/Assets/image-removebg-preview.png'},
+    {'name': 'Course 2', 'duration': '3 hours','image' : 'lib/Assets/image-removebg-preview.png'},
+    {'name': 'Course 3', 'duration': '1.5 hours','image' : 'lib/Assets/image-removebg-preview.png'},
+    {'name': 'Course 4', 'duration': '4 hours','image' : 'lib/Assets/image-removebg-preview.png'},
+    {'name': 'Information', 'duration': '2.5 hours','image' : 'lib/Assets/image-removebg-preview.png'},
+    {'name': 'Couhse 1', 'duration': '2 hours','image' : 'lib/Assets/image-removebg-preview.png'},
+    {'name': 'Couhse 2', 'duration': '3 hours','image' : 'lib/Assets/image-removebg-preview.png'},
+    {'name': 'Couhsr 3', 'duration': '1.5 hours','image' : 'lib/Assets/image-removebg-preview.png'},
   ];
 
   List<Map<String, String>> filteredCourses = [];
@@ -37,41 +40,101 @@ class _HomePageState extends State<HomePage> {
                   'lib/Assets/image-removebg-preview.png',
                   width: 100,
                   height: 100,
-                  ),
+                ),
                 Column(
                   children: [
                     Text(
                       'Welcome to GeekLearn',
-                      style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold), // set the font size as per your requirement
+                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'Get ready to level up our knowledge',
                       style: TextStyle(fontSize: 16),
-                    )
+                    ),
                   ],
-                )
-                
+                ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            Container(
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: TextField(
                 controller: searchController,
                 decoration: InputDecoration(
                   labelText: 'Search for courses',
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
                 onChanged: onSearchTextChanged,
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: filteredCourses.length,
-              itemBuilder: (context, index) {
-                return CourseCard(
-                  courseName: filteredCourses[index]['name']!,
-                  courseDuration: filteredCourses[index]['duration']!,
-                );
-              },
+            Container(
+              margin: EdgeInsets.zero,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: filteredCourses.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Display the heading only for the first item in the filtered list
+                      if (index == 0 && filteredCourses.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, top: 0, bottom: 5.0),
+                          child: Text(
+                            'Your Searches',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      if (filteredCourses.isNotEmpty) 
+                        CourseCard(
+                          courseName: filteredCourses[index]['name']!,
+                          courseDuration: filteredCourses[index]['duration']!,
+                          courseImage: filteredCourses[index]['image']!,
+                        ),
+                    ],
+                  );
+                },
+              ),
+            ),
+            if (filteredCourses.isEmpty)
+              Container(
+                margin: EdgeInsets.zero,
+                height: 0,
+                width: 0,
+              ),
+            Container(
+              margin: EdgeInsets.zero,
+              child: Text(
+                'Complete List of Courses',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: allCourses.length,
+                itemBuilder: (context, index) {
+                  if (allCourses.isNotEmpty) {
+                    return CourseCard(
+                      courseName: allCourses[index]['name']!,
+                      courseDuration: allCourses[index]['duration']!,
+                      courseImage: allCourses[index]['image']!,
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             ),
           ],
         ),
@@ -81,10 +144,14 @@ class _HomePageState extends State<HomePage> {
 
   void onSearchTextChanged(String searchText) {
     setState(() {
-      filteredCourses = allCourses
-          .where((course) =>
-              course['name']!.toLowerCase().contains(searchText.toLowerCase()))
-          .toList();
+      if (searchText.isEmpty) {
+        filteredCourses.clear();
+      } else {
+        filteredCourses = allCourses
+            .where((course) =>
+                course['name']!.toLowerCase().contains(searchText.toLowerCase()))
+            .toList();
+      }
     });
   }
 }
