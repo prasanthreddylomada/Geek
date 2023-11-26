@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  debugPaintSizeEnabled = true;
+  // debugPaintSizeEnabled = true;
   runApp(const MyApp());
 }
 

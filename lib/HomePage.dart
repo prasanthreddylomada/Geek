@@ -12,14 +12,46 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Map<String, String>> allCourses = [
-    {'name': 'Course 1', 'duration': '2 hours', 'image' : 'lib/Assets/image-removebg-preview.png'},
-    {'name': 'Course 2', 'duration': '3 hours','image' : 'lib/Assets/image-removebg-preview.png'},
-    {'name': 'Course 3', 'duration': '1.5 hours','image' : 'lib/Assets/image-removebg-preview.png'},
-    {'name': 'Course 4', 'duration': '4 hours','image' : 'lib/Assets/image-removebg-preview.png'},
-    {'name': 'Information', 'duration': '2.5 hours','image' : 'lib/Assets/image-removebg-preview.png'},
-    {'name': 'Couhse 1', 'duration': '2 hours','image' : 'lib/Assets/image-removebg-preview.png'},
-    {'name': 'Couhse 2', 'duration': '3 hours','image' : 'lib/Assets/image-removebg-preview.png'},
-    {'name': 'Couhsr 3', 'duration': '1.5 hours','image' : 'lib/Assets/image-removebg-preview.png'},
+    {
+      'name': 'Course 1',
+      'duration': '2 hours',
+      'image': 'lib/Assets/image-removebg-preview.png'
+    },
+    {
+      'name': 'Course 2',
+      'duration': '3 hours',
+      'image': 'lib/Assets/image-removebg-preview.png'
+    },
+    {
+      'name': 'Course 3',
+      'duration': '1.5 hours',
+      'image': 'lib/Assets/image-removebg-preview.png'
+    },
+    {
+      'name': 'Course 4',
+      'duration': '4 hours',
+      'image': 'lib/Assets/image-removebg-preview.png'
+    },
+    {
+      'name': 'Information',
+      'duration': '2.5 hours',
+      'image': 'lib/Assets/image-removebg-preview.png'
+    },
+    {
+      'name': 'Couhse 1',
+      'duration': '2 hours',
+      'image': 'lib/Assets/image-removebg-preview.png'
+    },
+    {
+      'name': 'Couhse 2',
+      'duration': '3 hours',
+      'image': 'lib/Assets/image-removebg-preview.png'
+    },
+    {
+      'name': 'Couhsr 3',
+      'duration': '1.5 hours',
+      'image': 'lib/Assets/image-removebg-preview.png'
+    },
   ];
 
   List<Map<String, String>> filteredCourses = [];
@@ -29,115 +61,103 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: ListView(
+        children: <Widget>[
+          SizedBox(height: 40),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset(
+                'lib/Assets/image-removebg-preview.png',
+                width: 100,
+                height: 100,
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Welcome to GeekLearn',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Get ready to level up our knowledge',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                labelText: 'Search for courses',
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              onChanged: onSearchTextChanged,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  'lib/Assets/image-removebg-preview.png',
-                  width: 100,
-                  height: 100,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'Welcome to GeekLearn',
-                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                // Display the heading only if the filteredCourses is not empty
+                if (filteredCourses.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0, top: 0, bottom: 5.0),
+                    child: Text(
+                      'Your Searches',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    Text(
-                      'Get ready to level up our knowledge',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
+                  ),
+                // Use a for loop to generate CourseCard widgets
+                for (int index = 0; index < filteredCourses.length; index++)
+                  CourseCard(
+                    courseName: filteredCourses[index]['name']!,
+                    courseDuration: filteredCourses[index]['duration']!,
+                    courseImage: filteredCourses[index]['image']!,
+                  ),
+              ],
+            )
+          ),
+          if (filteredCourses.isEmpty)
+            Container(
+              margin: EdgeInsets.zero,
+              height: 0,
+              width: 0,
+            ),
+          Container(
+            margin: EdgeInsets.only(left: 15.0, top: 10, bottom: 5.0),
+            child: Text(
+              'Complete List of Courses',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                for (int i = 0; i < allCourses.length; i++)
+                  CourseCard(
+                      courseName: allCourses[i]['name']!,
+                      courseDuration: allCourses[i]['duration']!,
+                      courseImage: allCourses[i]['image']!)
               ],
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              child: TextField(
-                controller: searchController,
-                decoration: InputDecoration(
-                  labelText: 'Search for courses',
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                onChanged: onSearchTextChanged,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.zero,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: filteredCourses.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Display the heading only for the first item in the filtered list
-                      if (index == 0 && filteredCourses.isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0, top: 0, bottom: 5.0),
-                          child: Text(
-                            'Your Searches',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      if (filteredCourses.isNotEmpty) 
-                        CourseCard(
-                          courseName: filteredCourses[index]['name']!,
-                          courseDuration: filteredCourses[index]['duration']!,
-                          courseImage: filteredCourses[index]['image']!,
-                        ),
-                    ],
-                  );
-                },
-              ),
-            ),
-            if (filteredCourses.isEmpty)
-              Container(
-                margin: EdgeInsets.zero,
-                height: 0,
-                width: 0,
-              ),
-            Container(
-              margin: EdgeInsets.zero,
-              child: Text(
-                'Complete List of Courses',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.zero,
-              padding: EdgeInsets.zero,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: allCourses.length,
-                itemBuilder: (context, index) {
-                  if (allCourses.isNotEmpty) {
-                    return CourseCard(
-                      courseName: allCourses[index]['name']!,
-                      courseDuration: allCourses[index]['duration']!,
-                      courseImage: allCourses[index]['image']!,
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -148,8 +168,9 @@ class _HomePageState extends State<HomePage> {
         filteredCourses.clear();
       } else {
         filteredCourses = allCourses
-            .where((course) =>
-                course['name']!.toLowerCase().contains(searchText.toLowerCase()))
+            .where((course) => course['name']!
+                .toLowerCase()
+                .contains(searchText.toLowerCase()))
             .toList();
       }
     });
