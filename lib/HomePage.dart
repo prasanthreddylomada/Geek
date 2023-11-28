@@ -214,6 +214,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
+                IconButton(onPressed: ()async{FirebaseAuth.instance.signOut();}, icon: Icon(Icons.logout))
               ],
             );
             }
