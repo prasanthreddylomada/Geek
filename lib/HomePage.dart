@@ -13,44 +13,60 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Map<String, String>> allCourses = [
     {
+      'key' : '1',
       'name': 'Course 1',
       'duration': '2 hours',
-      'image': 'lib/Assets/image-removebg-preview.png'
+      'image': 'lib/Assets/image-removebg-preview.png',
+      'detail': 'details'
     },
     {
+      'key' : '2',
       'name': 'Course 2',
       'duration': '3 hours',
-      'image': 'lib/Assets/image-removebg-preview.png'
+      'image': 'lib/Assets/image-removebg-preview.png',
+      'detail': 'details'
     },
     {
+      'key' : '3',
       'name': 'Course 3',
       'duration': '1.5 hours',
-      'image': 'lib/Assets/image-removebg-preview.png'
+      'image': 'lib/Assets/image-removebg-preview.png',
+      'detail': 'details'
     },
     {
+      'key' : '4',
       'name': 'Course 4',
       'duration': '4 hours',
-      'image': 'lib/Assets/image-removebg-preview.png'
+      'image': 'lib/Assets/image-removebg-preview.png',
+      'detail': 'details'
     },
     {
+      'key' : '5',
       'name': 'Information',
       'duration': '2.5 hours',
-      'image': 'lib/Assets/image-removebg-preview.png'
+      'image': 'lib/Assets/image-removebg-preview.png',
+      'detail': 'details'
     },
     {
+      'key' : '6',
       'name': 'Couhse 1',
       'duration': '2 hours',
-      'image': 'lib/Assets/image-removebg-preview.png'
+      'image': 'lib/Assets/image-removebg-preview.png',
+      'detail': 'details'
     },
     {
+      'key' : '7',
       'name': 'Couhse 2',
       'duration': '3 hours',
-      'image': 'lib/Assets/image-removebg-preview.png'
+      'image': 'lib/Assets/image-removebg-preview.png',
+      'detail': 'details'
     },
     {
+      'key' : '8',
       'name': 'Couhsr 3',
       'duration': '1.5 hours',
-      'image': 'lib/Assets/image-removebg-preview.png'
+      'image': 'lib/Assets/image-removebg-preview.png',
+      'detail': 'details'
     },
   ];
 
@@ -63,7 +79,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          SizedBox(height: 40),
+          SizedBox(height: 0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -124,6 +140,8 @@ class _HomePageState extends State<HomePage> {
                     courseName: filteredCourses[index]['name']!,
                     courseDuration: filteredCourses[index]['duration']!,
                     courseImage: filteredCourses[index]['image']!,
+                    courseKey: filteredCourses[index]['key']!,
+                    courseDetail: filteredCourses[index]['detail']!,
                   ),
               ],
             )
@@ -153,7 +171,10 @@ class _HomePageState extends State<HomePage> {
                   CourseCard(
                       courseName: allCourses[i]['name']!,
                       courseDuration: allCourses[i]['duration']!,
-                      courseImage: allCourses[i]['image']!)
+                      courseImage: allCourses[i]['image']!,
+                      courseKey: allCourses[i]['key']!,
+                      courseDetail: allCourses[i]['detail']!,
+                    )
               ],
             ),
           ),
