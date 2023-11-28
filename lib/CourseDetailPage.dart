@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geek/CourseCard.dart';
+import 'dart:io';
 
 class CourseDetailPage extends StatelessWidget {
   final String courseName;
@@ -18,19 +19,66 @@ class CourseDetailPage extends StatelessWidget {
     required this.courseKey,
   }) : super(key: key);
 
+  String readCourseDetailsFromFile(String filePath) {
+    try {
+      File file = File(filePath);
+      String contents = file.readAsStringSync();
+      return contents;
+    } catch (e) {
+      print('Error reading course details');
+      return 'Error reading course details when path is $filePath';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    String courseDetails = readCourseDetailsFromFile(courseDetail);
     return Scaffold(
       appBar: AppBar(
-        title: Text(courseName),
+        title: Text(
+          courseName,
+          style: TextStyle(
+            fontSize: 25,
+          ),
+          ),
         backgroundColor: Color.fromRGBO(156, 191, 96, 1),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CourseCard(courseName: courseName, courseDuration: courseDuration, courseImage: courseImage, courseKey: courseKey, courseDetail: courseDetail),
-          Text('Detail:$courseDetail'),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10,),
+            CourseCard(courseName: courseName, courseDuration: courseDuration, courseImage: courseImage, courseKey: courseKey, courseDetail: courseDetail),
+            SizedBox(height: 10,),
+            Container(
+              margin: EdgeInsets.fromLTRB(15, 10, 15, 20),
+              child: Text(
+              'Detail: $courseDetails',
+              style: TextStyle(fontSize: 20),
+            ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(15, 10, 15, 20),
+              padding: EdgeInsets.all(10), // Add padding for better aesthetics
+              decoration: BoxDecoration(
+                // color: Color.fromRGBO(156, 191, 96, 1), // Set the background color
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Congratulations on completing',
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  ),
+                  Text(
+                    '$courseName',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                ],
+              ),
+            )            
+          ],
+        ),
       ),
     );
   }
