@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geek/LoginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -7,14 +8,14 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _mailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
 
-  void _signup() {
-    // Perform signup logic here
-    print('Username: ${_usernameController.text}, Password: ${_passwordController.text}, Confirm Password: ${_confirmPasswordController.text}');
-  }
+  // void _signup() {
+  //   // Perform signup logic here
+  //   print('Username: ${_mailController.text}, Password: ${_passwordController.text}, Confirm Password: ${_confirmPasswordController.text}');
+  // }
 
 
   void _navigateToLogin(BuildContext context) {
@@ -22,6 +23,19 @@ class _SignupPageState extends State<SignupPage> {
       context,
       MaterialPageRoute(builder: (context) => LoginPage()),
     );
+  }
+
+  void _signup() async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _mailController.text,
+        password: _passwordController.text,
+      );
+      _navigateToLogin(context);
+      print('Signup successful!');
+    } catch (e) {
+      print('Signup failed: $e');
+    }
   }
 
   @override
@@ -47,7 +61,7 @@ class _SignupPageState extends State<SignupPage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                   child: Text(
-                    'Username',
+                    'Mail',
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -58,9 +72,9 @@ class _SignupPageState extends State<SignupPage> {
             Container(
               margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: TextField(
-                controller: _usernameController,
+                controller: _mailController,
                 decoration: InputDecoration(
-                  labelText: 'Username',
+                  labelText: 'abc@gmail.com',
                   contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),

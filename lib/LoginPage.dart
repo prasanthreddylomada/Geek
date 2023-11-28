@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geek/HomePage.dart';
 import 'package:geek/SignupPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -10,12 +11,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _mailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  void _login() {
-    // Perform login logic here
-    print('Username: ${_usernameController.text}, Password: ${_passwordController.text}');
+  void _login() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _mailController.text,
+        password: _passwordController.text,
+      );
+      _navigateToHome(context);
+      print('Login successful: ${userCredential.user?.uid}');
+    } catch (e) {
+      print('Login failed: $e');
+    }
   }
 
   void _navigateToHome(BuildContext context) {
@@ -55,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                   child: Text(
-                    'Username',
+                    'Mail',
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -67,9 +76,9 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: TextField(
-                controller: _usernameController,
+                controller: _mailController,
                 decoration: InputDecoration(
-                  labelText: 'Username',
+                  labelText: 'abc@gmail.com',
                   contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
