@@ -20,15 +20,36 @@ class _LoginPageState extends State<LoginPage> {
         email: _mailController.text,
         password: _passwordController.text,
       );
-      _navigateToHome(context);
       print('Login successful: ${userCredential.user?.uid}');
+      _navigateToHome(context);
     } catch (e) {
       print('Login failed: $e');
+      _showAlert('Login failed. Please check your email and password.');
     }
   }
 
+  void _showAlert(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Alert'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _navigateToHome(BuildContext context) {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => HomePage()),
     );
@@ -123,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                   size: 36.0,
                 ),
                 onPressed: () {
-                  _navigateToHome(context);
+                  _login();
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromRGBO(156, 191, 96, 1),

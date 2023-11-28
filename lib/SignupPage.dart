@@ -25,18 +25,63 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
+
   void _signup() async {
+    // Validate email format
+    final emailRegex = RegExp(r"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (!emailRegex.hasMatch(_mailController.text)) {
+      _showAlert('Invalid email format');
+      return;
+    }
+
+    // Validate password length
+    if (_passwordController.text.length < 6) {
+      _showAlert('Password must be at least 6 characters');
+      return;
+    }
+
+    // Validate password and confirm password match
+    if (_passwordController.text != _confirmPasswordController.text) {
+      _showAlert('Passwords do not match');
+      return;
+    }
+
     try {
+      // Attempt to create user
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _mailController.text,
         password: _passwordController.text,
       );
+
+      // Navigate to login page on successful signup
       _navigateToLogin(context);
       print('Signup successful!');
     } catch (e) {
+      // Handle signup failure
       print('Signup failed: $e');
+      _showAlert('Signup failed. Please try again.');
     }
   }
+
+void _showAlert(String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Alert'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
