@@ -66,7 +66,7 @@ class CourseDetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Congratulations on completing',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   ),
