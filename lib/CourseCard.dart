@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geek/CourseDetailPage.dart';
+
 class CourseCard extends StatelessWidget {
   final String courseName;
   final String courseDuration;
@@ -18,8 +19,7 @@ class CourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-       onTap: () {
-        // Navigate to CourseDetailPage when the card is tapped
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -35,46 +35,52 @@ class CourseCard extends StatelessWidget {
         );
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(35), // Adjust the value for the desired roundness
+        borderRadius: BorderRadius.circular(35),
         child: Card(
           margin: EdgeInsets.fromLTRB(15, 5, 15, 5),
           color: Color.fromRGBO(156, 191, 96, 1),
           child: Row(
             children: [
-              Image.asset(
-                courseImage,
-                width: 100,
-                height: 100,
+              Container(
+                margin: EdgeInsets.fromLTRB(10, 0, 5, 0),
+                child: Image.network(courseImage),
+                height: 40,
+                width: 40,
               ),
-              SizedBox(width: 10), // Add some spacing between image and text
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        'Course: ',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '$courseName',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Duration: ',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '$courseDuration',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
-                ],
+              SizedBox(width: 10),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Course: ',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '$courseName',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Duration: ',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '$courseDuration',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

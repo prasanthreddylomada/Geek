@@ -19,20 +19,10 @@ class CourseDetailPage extends StatelessWidget {
     required this.courseKey,
   }) : super(key: key);
 
-  String readCourseDetailsFromFile(String filePath) {
-    try {
-      File file = File(filePath);
-      String contents = file.readAsStringSync();
-      return contents;
-    } catch (e) {
-      print('Error reading course details');
-      return 'Error reading course details when path is $filePath';
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
-    String courseDetails = readCourseDetailsFromFile(courseDetail);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -52,7 +42,7 @@ class CourseDetailPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(15, 10, 15, 20),
               child: Text(
-              'Detail: $courseDetails',
+              courseDetail,
               style: TextStyle(fontSize: 20),
             ),
             ),
