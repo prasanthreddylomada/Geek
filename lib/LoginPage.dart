@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geek/HomePage.dart';
 import 'package:geek/SignupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -61,6 +63,36 @@ class _LoginPageState extends State<LoginPage> {
       MaterialPageRoute(builder: (context) => SignupPage()),
     );
   }
+
+  void _handleGoogleSignIn() async {
+    try {
+      print('Google button called');
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser != null) {
+        GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+        AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+
+        print('Google sign-in successful: ${userCredential.user?.uid}');
+
+        // Check if you have userCredential and navigate to the home page
+        if (userCredential.user != null) {
+          _navigateToHome(context);
+        }
+      } else {
+        print('Google sign-in canceled');
+      }
+    } catch (error) {
+      print('Google sign-in failed: $error');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -169,39 +201,42 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.facebook, size: 40.0), // Increase the size of the icon
-                  onPressed: () {
-                    // Add Facebook button logic
-                  },
-                ),
-                InkWell(
-                  onTap: () {
-                    // Add Gmail button logic
-                  },
-                  child: Image.asset(
-                    'lib/Assets/gmail-removebg-preview.png', // Replace with the actual path to your image asset
-                    width: 120.0, // Set the width of the image
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10,0,10,10), // Adjust the margin as needed
+                    child: SignInButton(
+                      Buttons.facebook,
+                      onPressed: () {
+                        // Handle Facebook button press
+                      },
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Add Google button logic
-                  },
-                  child: Image.asset(
-                    'lib/Assets/google-removebg-preview.png', // Replace with the actual path to your image asset
-                    width: 40.0, // Set the width of the image
-                    height: 40.0, // Set the height of the image
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10,0,10,10), // Adjust the margin as needed
+                    child: SignInButton(
+                      Buttons.google,
+                      onPressed: () {
+                        _handleGoogleSignIn();
+                      },
+                    ),
                   ),
-                ),
-
-                // Add more IconButton widgets as needed
-              ],
-            ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10,0,10,10), // Adjust the margin as needed
+                    child: SignInButton(
+                      Buttons.gitHub,
+                      onPressed: () {
+                        // Handle GitHub button press
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
