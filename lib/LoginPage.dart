@@ -108,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 100),
             Container(
               child: Image.asset('lib/Assets/Screenshot 2023-11-21 232836.png'),
             ),
@@ -196,7 +195,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(0),
               child: TextButton(
                 onPressed: () {
                   _navigateToSignup(context);
@@ -209,40 +207,31 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10,0,10,10), // Adjust the margin as needed
-                    child: SignInButton(
-                      Buttons.facebook,
-                      onPressed: () {
-                        _hangleFacebookSignIn();
-                      },
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10,0,10,10), // Adjust the margin as needed
-                    child: SignInButton(
-                      Buttons.google,
-                      onPressed: () {
-                        _handleGoogleSignIn();
-                      },
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10,0,10,10), // Adjust the margin as needed
-                    child: SignInButton(
-                      Buttons.gitHub,
-                      onPressed: () {
-                        _handleGithubSignIn();
-                      },
-                    ),
-                  ),
-                ],
+            Container(
+              margin: EdgeInsets.fromLTRB(10,0,10,5), // Adjust the margin as needed
+              child: SignInButton(
+                Buttons.facebook,
+                onPressed: () {
+                  _hangleFacebookSignIn();
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(10,0,10,5), // Adjust the margin as needed
+              child: SignInButton(
+                Buttons.google,
+                onPressed: () {
+                  _handleGoogleSignIn();
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(10,0,10,5), // Adjust the margin as needed
+              child: SignInButton(
+                Buttons.gitHub,
+                onPressed: () {
+                  _handleGithubSignIn();
+                },
               ),
             )
           ],
