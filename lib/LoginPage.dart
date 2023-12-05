@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:github_sign_in/github_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -98,8 +99,29 @@ class _LoginPageState extends State<LoginPage> {
 
   }
 
-  void _hangleFacebookSignIn(){
+  void _hangleFacebookSignIn() async {
+      try {
+      final LoginResult result = await FacebookAuth.instance.login(
+        permissions: ['email','public_profile'],
+      );
 
+      if (result.status == LoginStatus.success) {
+        final AuthCredential credential = FacebookAuthProvider.credential(result.accessToken!.token);
+
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+        User? user = userCredential.user;
+        print('Facebook sign-in successful: ${userCredential.user?.uid} ${user?.email}');
+        _showAlert('Facebook sign-in successful UID: ${user?.uid}\nEmail: ${user?.email}');
+        // Check if you have userCredential and navigate to the home page
+        if (userCredential.user != null) {
+          _navigateToHome(context);
+        }
+      } else {
+        print('Facebook sign-in canceled');
+      }
+    } catch (error) {
+      print('Facebook sign-in failed: $error');
+    }
   }
 
   @override
