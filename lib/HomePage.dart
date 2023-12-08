@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+  
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -15,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, String>> allCourses = [];
   List<Map<String, String>> filteredCourses = [];
   bool isLoading = true;
+  String loginMethod = '';
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -22,6 +24,24 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // pushAllCoursesToFirebase();
     fetchCourses();
+    checkLoginMethod();
+  }
+
+  void checkLoginMethod() {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      // User is logged in
+      if (user.providerData.isNotEmpty) {
+        loginMethod = user.providerData.first.providerId;
+        Future.microtask(() => _showLoginAlert(loginMethod));
+      }
+    }
+  }
+
+  void _showLoginAlert(String loginMethod) {
+    String message = 'Logged in using $loginMethod';
+    _showAlert(message);
   }
 
   // void pushAllCoursesToFirebase() async {
@@ -37,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   //     }
   //     print('All courses pushed to Firebase successfully!');
   //   } catch (err) {
-  //     _showAlert('Error pushing courses to Firebase: $err');
+  //     _showAlert('Error pushing courses to Firebase: $err');r
   //   }
   // }
 

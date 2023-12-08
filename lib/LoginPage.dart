@@ -4,7 +4,6 @@ import 'package:geek/SignupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
-import 'package:github_sign_in/github_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -93,10 +92,6 @@ class _LoginPageState extends State<LoginPage> {
     } catch (error) {
       print('Google sign-in failed: $error');
     }
-  }
-
-  void _handleGithubSignIn(){
-
   }
 
   void _hangleFacebookSignIn() async {
@@ -247,15 +242,6 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(10,0,10,5), // Adjust the margin as needed
-              child: SignInButton(
-                Buttons.gitHub,
-                onPressed: () {
-                  _handleGithubSignIn();
-                },
-              ),
-            )
           ],
         ),
       ),
