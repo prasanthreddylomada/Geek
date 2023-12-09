@@ -20,7 +20,7 @@ To embark on your learning journey with Geek, follow these simple steps:
      cd geek
      ```
 
-3. **Install Dependencies:**
+3. **Install Dependencies:**(Assuming you have flutter installed if not refer [flutter docs][https://docs.flutter.dev/get-started/install/windows] for installation)
    - Run the command `flutter pub get` in your terminal.
    - This will automatically install the necessary dependencies and launch the application.
 
