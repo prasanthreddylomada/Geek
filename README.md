@@ -17,7 +17,7 @@ To embark on your learning journey with Geek, follow these simple steps:
    - Open your terminal and move to the cloned project directory.
 
      ```bash
-     cd geek_flutter_project
+     cd geek
      ```
 
 3. **Install Dependencies:**
@@ -59,7 +59,7 @@ For developers looking to build the project from scratch, here are the steps:
     ```
 2. **Navigate to the Project:**
     ```bash
-   cd geek_flutter_project
+   cd geek
     ```
 3. **Install Dependencies:**
     ```bash
