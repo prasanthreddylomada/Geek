@@ -10,7 +10,7 @@ To embark on your learning journey with Geek, follow these simple steps:
    - Clone the Git repository to your desired location.
 
      ```bash
-     git clone [repository_url]
+     git clone https://github.com/prasanthreddylomada/geek.git
      ```
 
 2. **Navigate to the Project:**
