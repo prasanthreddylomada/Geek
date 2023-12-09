@@ -75,3 +75,12 @@ For developers looking to build the project from scratch, here are the steps:
 
 ## You can try the demo yourself by using the release apk
 [APK](https://github.com/prasanthreddylomada/geek/blob/main/app-release.apk)
+
+## Facebook OAuth Test User
+
+To check the Facebook OAuth functionality, you can use the following test user details:
+
+- **Username:** rockstarinan@gmail.com
+- **Password:** SDN_facebook
+
+**Note:** Before trying Facebook sign-in, make sure there is no Facebook logged in because this app is not published, which might cause errors. Logout of other devices and then use this test user.
