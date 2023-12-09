@@ -6,7 +6,7 @@ class CourseCard extends StatelessWidget {
   final String courseDuration;
   final String courseImage;
   final String courseKey;
-  final String courseDetail;
+  final Map<String, dynamic> courseDetail;
 
   CourseCard({
     required this.courseName,

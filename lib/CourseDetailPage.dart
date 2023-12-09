@@ -6,7 +6,7 @@ class CourseDetailPage extends StatelessWidget {
   final String courseName;
   final String courseDuration;
   final String courseImage;
-  final String courseDetail;
+  final Map<String, dynamic> courseDetail;
   final String courseKey;
 
   // Use const constructor for named parameters
@@ -40,12 +40,67 @@ class CourseDetailPage extends StatelessWidget {
             CourseCard(courseName: courseName, courseDuration: courseDuration, courseImage: courseImage, courseKey: courseKey, courseDetail: courseDetail),
             SizedBox(height: 10,),
             Container(
-              margin: EdgeInsets.fromLTRB(15, 10, 15, 20),
-              child: Text(
-              courseDetail,
-              style: TextStyle(fontSize: 20),
-            ),
-            ),
+  margin: EdgeInsets.fromLTRB(15, 10, 15, 20),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        "Course Details:",
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 10),
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.grey[200], // Set a background color for better visibility
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (var entry in courseDetail.entries)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Render the key as bold and in a subsection style
+                  Text(
+                    entry.key,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
+                  ),
+                  // Check if the value is an array
+                  if (entry.value is List)
+                    // If it's an array, iterate through its elements and display them as sub-subsections
+                    for (var item in entry.value)
+                      Padding(
+                        padding: EdgeInsets.only(left: 16),
+                        child: Text(
+                          "• $item",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      )
+                  else
+                    // If it's not an array, display the value as a regular text
+                    Padding(
+                      padding: EdgeInsets.only(left: 16),
+                      child: Text(
+                        entry.value.toString(),
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  SizedBox(height: 10),
+                ],
+              ),
+          ],
+        ),
+      ),
+    ],
+  ),
+),
+
             Container(
               margin: EdgeInsets.fromLTRB(15, 10, 15, 20),
               padding: EdgeInsets.all(10), // Add padding for better aesthetics

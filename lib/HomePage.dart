@@ -13,8 +13,133 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Map<String, String>> allCourses = [];
-  List<Map<String, String>> filteredCourses = [];
+
+  final List<Map<String, dynamic>> coursesData = [
+    {
+      "key": "1",
+      "name": "Business Analytics",
+      "duration": "2 hours",
+      "image": "",
+      "detail": {
+        "definition": "Business Analytics involves the use of data analysis tools and techniques to make informed business decisions...",
+        "types": {
+          "descriptiveAnalytics": "Focuses on summarizing and presenting historical data...",
+          "predictiveAnalytics": "Uses statistical algorithms and machine learning to predict future outcomes...",
+          "prescriptiveAnalytics": "Provides recommendations for actions to optimize business processes..."
+        },
+        "applications": "Applications include market analysis, performance optimization, and risk management...",
+        "challengesAndFuture": "Challenges involve data quality, integration of analytics into business processes, and staying abreast of evolving technologies..."
+      }
+    },
+    {
+      "key": "2",
+      "name": "Data Science Fundamentals",
+      "duration": "3 hours",
+      "image": "",
+      "detail": {
+        "definition": "Data Science is a multidisciplinary field that uses scientific methods, processes, algorithms, and systems to extract insights and knowledge from structured and unstructured data...",
+        "skills": ["data analysis", "machine learning", "statistics", "programming"],
+        "applications": "Applications include predictive modeling, data-driven decision-making, and pattern recognition...",
+        "challengesAndFuture": "Challenges involve handling big data, ensuring data privacy, and advancing research in artificial intelligence..."
+      }
+    },
+    {
+      "key": "3",
+      "name": "Python Programming for Data Science",
+      "duration": "4 hours",
+      "image": "",
+      "detail": {
+        "description": "This course focuses on teaching the fundamentals of Python programming for data science...",
+        "topicsCovered": ["variables", "data types", "control structures", "functions", "libraries for data science"],
+        "applications": "Applications include data manipulation, analysis, and visualization using Python...",
+        "challengesAndFuture": "Challenges involve code efficiency, version control, and staying updated with Python libraries for data science..."
+      }
+    },
+    {
+      "key": "4",
+      "name": "Machine Learning for Beginners",
+      "duration": "2.5 hours",
+      "image": "",
+      "detail": {
+        "definition": "Machine Learning is a subset of artificial intelligence that focuses on the development of algorithms and models that enable computers to learn from data...",
+        "types": ["supervisedLearning", "unsupervisedLearning", "reinforcementLearning"],
+        "applications": "Applications include image recognition, natural language processing, and recommendation systems...",
+        "challengesAndFuture": "Challenges involve overfitting, model interpretability, and selecting appropriate algorithms for specific tasks..."
+      }
+    },
+    {
+      "key": "5",
+      "name": "Introduction to Cybersecurity",
+      "duration": "2.5 hours",
+      "image": "",
+      "detail": {
+        "definition": "Cybersecurity involves the protection of computer systems, networks, and data from theft, damage, or unauthorized access...",
+        "topicsCovered": ["network security", "encryption", "firewalls", "malware detection"],
+        "applications": "Applications include securing personal information, preventing cyber attacks, and ensuring the integrity of digital communication...",
+        "challengesAndFuture": "Challenges involve adapting to evolving cyber threats, addressing vulnerabilities, and enhancing cybersecurity education..."
+      }
+    },
+    {
+      "key": "6",
+      "name": "Web Development Basics",
+      "duration": "3 hours",
+      "image": "",
+      "detail": {
+        "description": "This course introduces the fundamental concepts of web development, including HTML, CSS, and JavaScript...",
+        "topicsCovered": ["HTML", "CSS", "JavaScript", "responsive design"],
+        "applications": "Applications include creating and styling web pages, adding interactivity, and ensuring compatibility across devices...",
+        "challengesAndFuture": "Challenges involve browser compatibility, responsive design, and staying updated with web development frameworks..."
+      }
+    },
+    {
+      "key": "7",
+      "name": "Artificial Intelligence in Healthcare",
+      "duration": "2.5 hours",
+      "image": "",
+      "detail": {
+        "description": "This course explores the applications of artificial intelligence in healthcare, including diagnosis, treatment planning, and personalized medicine...",
+        "applications": "Applications include medical image analysis, predictive analytics for patient outcomes, and drug discovery...",
+        "challengesAndFuture": "Challenges involve data privacy, regulatory compliance, and ethical considerations in using AI for healthcare..."
+      }
+    },
+    {
+      "key": "8",
+      "name": "Quantum Computing Fundamentals",
+      "duration": "3 hours",
+      "image": "",
+      "detail": {
+        "definition": "Quantum Computing leverages the principles of quantum mechanics to perform computations that would be infeasible for classical computers...",
+        "topicsCovered": ["qubits", "quantum gates", "quantum entanglement"],
+        "applications": "Potential applications include solving complex optimization problems, simulating quantum systems, and enhancing machine learning algorithms...",
+        "challengesAndFuture": "Challenges involve error correction, scalability, and developing practical quantum algorithms for various tasks..."
+      }
+    },
+    {
+      "key": "9",
+      "name": "Natural Language Processing in Action",
+      "duration": "2.5 hours",
+      "image": "",
+      "detail": {
+        "description": "This course focuses on practical applications of natural language processing, including language understanding, sentiment analysis, and text generation...",
+        "applications": "Applications include chatbots, language translation, and information extraction from text...",
+        "challengesAndFuture": "Challenges involve handling ambiguity in language, improving accuracy, and adapting to different languages and contexts..."
+      }
+    },
+    {
+      "key": "10",
+      "name": "Blockchain Technology Explained",
+      "duration": "3 hours",
+      "image": "",
+      "detail": {
+        "definition": "Blockchain is a decentralized and distributed ledger technology that securely records transactions across a network of computers...",
+        "topicsCovered": ["blocks", "cryptographic hashing", "smart contracts"],
+        "applications": "Applications include secure financial transactions, supply chain transparency, and decentralized applications...",
+        "challengesAndFuture": "Challenges involve scalability, regulatory frameworks, and addressing environmental concerns related to blockchain mining..."
+      }
+    }
+  ];
+  List<Map<String, dynamic>> allCourses = [];
+  List<Map<String, dynamic>> filteredCourses = [];
   bool isLoading = true;
   String loginMethod = '';
   TextEditingController searchController = TextEditingController();
@@ -22,7 +147,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // pushAllCoursesToFirebase();
+    // _pushAllCoursesToFirebase();
     fetchCourses();
     checkLoginMethod();
   }
@@ -44,48 +169,50 @@ class _HomePageState extends State<HomePage> {
     _showAlert(message);
   }
 
-  // void pushAllCoursesToFirebase() async {
-  //   try {
-  //     for (int i = 0; i < allCourses.length; i++) {
-  //       await FirebaseFirestore.instance.collection('courses').add({
-  //         'key' : i,
-  //         'name': allCourses[i]['name'],
-  //         'duration': allCourses[i]['duration'],
-  //         'image': allCourses[i]['image'],
-  //         'detail': allCourses[i]['detail'],
-  //       });
-  //     }
-  //     print('All courses pushed to Firebase successfully!');
-  //   } catch (err) {
-  //     _showAlert('Error pushing courses to Firebase: $err');r
-  //   }
-  // }
+  void _pushAllCoursesToFirebase() async {
+  try {
+    for (int i = 0; i < coursesData.length; i++) {
+      await FirebaseFirestore.instance.collection('courses').add({
+        'key': coursesData[i]['key'],
+        'name': coursesData[i]['name'],
+        'duration': coursesData[i]['duration'],
+        'image': coursesData[i]['image'],
+        'detail': coursesData[i]['detail'],
+      });
+    }
+    print('All courses pushed to Firebase successfully!');
+  } catch (err) {
+    _showAlert('Error pushing courses to Firebase: $err');
+  }
+}
+
 
   void fetchCourses() async {
-    try {
-      QuerySnapshot<Map<String, dynamic>> coursesSnapshot =
-          await FirebaseFirestore.instance.collection('courses').get();
+  try {
+    QuerySnapshot<Map<String, dynamic>> coursesSnapshot =
+        await FirebaseFirestore.instance.collection('courses').get();
 
-      // Process the data from the snapshot
-      List<Map<String, String>> courses = coursesSnapshot.docs
-          .map((DocumentSnapshot<Map<String, dynamic>> doc) {
-        return {
-          'key': doc.id,
-          'name': doc['name'] as String,
-          'duration': doc['duration'] as String,
-          'image': doc['image'] as String,
-          'detail': doc['detail'] as String,
-        };
-      }).toList();
-
-      setState(() {
-        allCourses = courses;
-        isLoading = false;
-      });
-    } catch (err) {
-      _showAlert(err.toString());
-    }
+    // Process the data from the snapshot
+    List<Map<String, dynamic>> courses = coursesSnapshot.docs
+        .map((DocumentSnapshot<Map<String, dynamic>> doc) {
+      return {
+        'key': doc.id,
+        'name': doc['name'] as String,
+        'duration': doc['duration'] as String,
+        'image': doc['image'] as String,
+        'detail': doc['detail'] as Map<String, dynamic>,
+      };
+    }).toList();
+    print('All courses fetched from Firebase successfully!');
+    setState(() {
+      allCourses = courses;
+      isLoading = false;
+    });
+  } catch (err) {
+    _showAlert(err.toString());
   }
+}
+
 
   void _showAlert(String message) {
     showDialog(
