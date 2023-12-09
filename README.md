@@ -69,3 +69,6 @@ For developers looking to build the project from scratch, here are the steps:
     ```bash
    flutter run
     ```
+
+## Watch the working
+[![Click to watch the video](https://github.com/flutter)](https://www.youtube.com/watch?v=oekGGx_h73g)
