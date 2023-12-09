@@ -71,4 +71,4 @@ For developers looking to build the project from scratch, here are the steps:
     ```
 
 ## Watch the working(click the image)
-[![Click to watch the video](https://drive.google.com/file/d/1Fha59zw3QcyhiUcPlfrclKa03xXyC6Uk/view?usp=drive_link)](https://drive.google.com/file/d/1FhT01pQ_d0us0_KWn3QA6vfXLvS8EYz7/view?usp=sharing)
+[![Click to watch the video](https://imgur.com/a/icno8mM)](https://drive.google.com/file/d/1FhT01pQ_d0us0_KWn3QA6vfXLvS8EYz7/view?usp=sharing)
