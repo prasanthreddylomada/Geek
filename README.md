@@ -55,7 +55,7 @@ For developers looking to build the project from scratch, here are the steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone [repository_url]
+   git clone https://github.com/prasanthreddylomada/geek.git
     ```
 2. **Navigate to the Project:**
     ```bash
@@ -71,4 +71,4 @@ For developers looking to build the project from scratch, here are the steps:
     ```
 
 ## Watch the working(click the image)
-[![Click to watch the video](https://live.staticflickr.com/65535/53386547824_5e25115b21_n.jpg)](https://drive.google.com/file/d/1FhT01pQ_d0us0_KWn3QA6vfXLvS8EYz7/view?usp=sharing)
+[![Click to watch the video](https://live.staticflickr.com/65535/53386547824_5e25115b21_n.jpg)](https://iiitbac-my.sharepoint.com/:v:/g/personal/prasanthkumar_lomada_iiitb_ac_in/EbDZDk20rS5AnF6ZDVAe44oBO8R8l_bJWpAIIQazzHh18A?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=folUrI)
