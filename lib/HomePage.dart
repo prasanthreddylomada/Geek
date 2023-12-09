@@ -152,15 +152,23 @@ void fetchCourses() async {
                               children: [
                                 Text(
                                   'Welcome to GeekLearn',
-                                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
                                 ),
                                 Text(
                                   'Get ready to level up your knowledge',
-                                  style: TextStyle(fontSize: 16),
+                                  style: TextStyle(fontSize: 13),
+                                  textAlign: TextAlign.center,
                                 ),
                               ],
                             ),
                           ),
+                          IconButton(
+                            onPressed: () async {
+                              // _pushAllCoursesToFirebase();
+                              FirebaseAuth.instance.signOut();
+                            },
+                            icon: Icon(Icons.logout))
                         ],
                       ),
                     ),
@@ -251,13 +259,6 @@ void fetchCourses() async {
                         ],
                       ),
                     ),
-                    
-                    IconButton(
-                        onPressed: () async {
-                          // _pushAllCoursesToFirebase();
-                          FirebaseAuth.instance.signOut();
-                        },
-                        icon: Icon(Icons.logout))
                   ],
                 );
               } else {

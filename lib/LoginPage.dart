@@ -68,8 +68,9 @@ class _LoginPageState extends State<LoginPage> {
   void _handleGoogleSignIn() async {
     try {
       print('Google button called');
+      await GoogleSignIn().signOut();
       GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
+      
       if (googleUser != null) {
         GoogleSignInAuthentication googleAuth = await googleUser.authentication;
         AuthCredential credential = GoogleAuthProvider.credential(
@@ -81,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
             await FirebaseAuth.instance.signInWithCredential(credential);
 
         print('Google sign-in successful: ${userCredential.user?.uid}');
-
+        
         // Check if you have userCredential and navigate to the home page
         if (userCredential.user != null) {
           _navigateToHome(context);

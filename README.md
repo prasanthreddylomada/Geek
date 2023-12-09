@@ -70,5 +70,5 @@ For developers looking to build the project from scratch, here are the steps:
    flutter run
     ```
 
-## Watch the working
-[![Click to watch the video](https://imgs.search.brave.com/BMuYABP7oP4l8HymmSOQIH30nF_YQMtJm-y7Bz-vc6Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9idXJz/dC5zaG9waWZ5Y2Ru/LmNvbS9waG90b3Mv/dHdvLXRvbmUtaW5r/LWNsb3VkLmpwZz93/aWR0aD0xMDAwJmZv/cm1hdD1wanBnJmV4/aWY9MCZpcHRjPTA)](https://www.youtube.com/watch?v=oekGGx_h73g)
+## Watch the working(click the image)
+[![Click to watch the video](https://drive.google.com/file/d/1Fha59zw3QcyhiUcPlfrclKa03xXyC6Uk/view?usp=drive_link)](https://drive.google.com/file/d/1FhT01pQ_d0us0_KWn3QA6vfXLvS8EYz7/view?usp=sharing)
