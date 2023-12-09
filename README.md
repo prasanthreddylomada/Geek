@@ -72,3 +72,6 @@ For developers looking to build the project from scratch, here are the steps:
 
 ## Watch the working(click the image)
 [![Click to watch the video](https://live.staticflickr.com/65535/53386547824_5e25115b21_n.jpg)](https://rb.gy/ugnqu4)
+
+## You can try the demo yourself by using the release apk
+[APK](https://github.com/prasanthreddylomada/geek/blob/main/app-release.apk)
