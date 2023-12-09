@@ -81,6 +81,6 @@ For developers looking to build the project from scratch, here are the steps:
 To check the Facebook OAuth functionality, you can use the following test user details:
 
 - **Username:** rockstarinan@gmail.com
-- **Password:** SDN_facebook
+- **Password:** For safety issues check report for password
 
 **Note:** Before trying Facebook sign-in, make sure there is no Facebook logged in because this app is not published, which might cause errors. Logout of other devices and then use this test user.
