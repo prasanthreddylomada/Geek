@@ -14,130 +14,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final List<Map<String, dynamic>> coursesData = [
-    {
-      "key": "1",
-      "name": "Business Analytics",
-      "duration": "2 hours",
-      "image": "",
-      "detail": {
-        "definition": "Business Analytics involves the use of data analysis tools and techniques to make informed business decisions...",
-        "types": {
-          "descriptiveAnalytics": "Focuses on summarizing and presenting historical data...",
-          "predictiveAnalytics": "Uses statistical algorithms and machine learning to predict future outcomes...",
-          "prescriptiveAnalytics": "Provides recommendations for actions to optimize business processes..."
-        },
-        "applications": "Applications include market analysis, performance optimization, and risk management...",
-        "challengesAndFuture": "Challenges involve data quality, integration of analytics into business processes, and staying abreast of evolving technologies..."
-      }
-    },
-    {
-      "key": "2",
-      "name": "Data Science Fundamentals",
-      "duration": "3 hours",
-      "image": "",
-      "detail": {
-        "definition": "Data Science is a multidisciplinary field that uses scientific methods, processes, algorithms, and systems to extract insights and knowledge from structured and unstructured data...",
-        "skills": ["data analysis", "machine learning", "statistics", "programming"],
-        "applications": "Applications include predictive modeling, data-driven decision-making, and pattern recognition...",
-        "challengesAndFuture": "Challenges involve handling big data, ensuring data privacy, and advancing research in artificial intelligence..."
-      }
-    },
-    {
-      "key": "3",
-      "name": "Python Programming for Data Science",
-      "duration": "4 hours",
-      "image": "",
-      "detail": {
-        "description": "This course focuses on teaching the fundamentals of Python programming for data science...",
-        "topicsCovered": ["variables", "data types", "control structures", "functions", "libraries for data science"],
-        "applications": "Applications include data manipulation, analysis, and visualization using Python...",
-        "challengesAndFuture": "Challenges involve code efficiency, version control, and staying updated with Python libraries for data science..."
-      }
-    },
-    {
-      "key": "4",
-      "name": "Machine Learning for Beginners",
-      "duration": "2.5 hours",
-      "image": "",
-      "detail": {
-        "definition": "Machine Learning is a subset of artificial intelligence that focuses on the development of algorithms and models that enable computers to learn from data...",
-        "types": ["supervisedLearning", "unsupervisedLearning", "reinforcementLearning"],
-        "applications": "Applications include image recognition, natural language processing, and recommendation systems...",
-        "challengesAndFuture": "Challenges involve overfitting, model interpretability, and selecting appropriate algorithms for specific tasks..."
-      }
-    },
-    {
-      "key": "5",
-      "name": "Introduction to Cybersecurity",
-      "duration": "2.5 hours",
-      "image": "",
-      "detail": {
-        "definition": "Cybersecurity involves the protection of computer systems, networks, and data from theft, damage, or unauthorized access...",
-        "topicsCovered": ["network security", "encryption", "firewalls", "malware detection"],
-        "applications": "Applications include securing personal information, preventing cyber attacks, and ensuring the integrity of digital communication...",
-        "challengesAndFuture": "Challenges involve adapting to evolving cyber threats, addressing vulnerabilities, and enhancing cybersecurity education..."
-      }
-    },
-    {
-      "key": "6",
-      "name": "Web Development Basics",
-      "duration": "3 hours",
-      "image": "",
-      "detail": {
-        "description": "This course introduces the fundamental concepts of web development, including HTML, CSS, and JavaScript...",
-        "topicsCovered": ["HTML", "CSS", "JavaScript", "responsive design"],
-        "applications": "Applications include creating and styling web pages, adding interactivity, and ensuring compatibility across devices...",
-        "challengesAndFuture": "Challenges involve browser compatibility, responsive design, and staying updated with web development frameworks..."
-      }
-    },
-    {
-      "key": "7",
-      "name": "Artificial Intelligence in Healthcare",
-      "duration": "2.5 hours",
-      "image": "",
-      "detail": {
-        "description": "This course explores the applications of artificial intelligence in healthcare, including diagnosis, treatment planning, and personalized medicine...",
-        "applications": "Applications include medical image analysis, predictive analytics for patient outcomes, and drug discovery...",
-        "challengesAndFuture": "Challenges involve data privacy, regulatory compliance, and ethical considerations in using AI for healthcare..."
-      }
-    },
-    {
-      "key": "8",
-      "name": "Quantum Computing Fundamentals",
-      "duration": "3 hours",
-      "image": "",
-      "detail": {
-        "definition": "Quantum Computing leverages the principles of quantum mechanics to perform computations that would be infeasible for classical computers...",
-        "topicsCovered": ["qubits", "quantum gates", "quantum entanglement"],
-        "applications": "Potential applications include solving complex optimization problems, simulating quantum systems, and enhancing machine learning algorithms...",
-        "challengesAndFuture": "Challenges involve error correction, scalability, and developing practical quantum algorithms for various tasks..."
-      }
-    },
-    {
-      "key": "9",
-      "name": "Natural Language Processing in Action",
-      "duration": "2.5 hours",
-      "image": "",
-      "detail": {
-        "description": "This course focuses on practical applications of natural language processing, including language understanding, sentiment analysis, and text generation...",
-        "applications": "Applications include chatbots, language translation, and information extraction from text...",
-        "challengesAndFuture": "Challenges involve handling ambiguity in language, improving accuracy, and adapting to different languages and contexts..."
-      }
-    },
-    {
-      "key": "10",
-      "name": "Blockchain Technology Explained",
-      "duration": "3 hours",
-      "image": "",
-      "detail": {
-        "definition": "Blockchain is a decentralized and distributed ledger technology that securely records transactions across a network of computers...",
-        "topicsCovered": ["blocks", "cryptographic hashing", "smart contracts"],
-        "applications": "Applications include secure financial transactions, supply chain transparency, and decentralized applications...",
-        "challengesAndFuture": "Challenges involve scalability, regulatory frameworks, and addressing environmental concerns related to blockchain mining..."
-      }
-    }
-  ];
+  
+
   List<Map<String, dynamic>> allCourses = [];
   List<Map<String, dynamic>> filteredCourses = [];
   bool isLoading = true;
@@ -147,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // _pushAllCoursesToFirebase();
     fetchCourses();
     checkLoginMethod();
   }
@@ -169,25 +46,29 @@ class _HomePageState extends State<HomePage> {
     _showAlert(message);
   }
 
-  void _pushAllCoursesToFirebase() async {
-  try {
-    for (int i = 0; i < coursesData.length; i++) {
-      await FirebaseFirestore.instance.collection('courses').add({
-        'key': coursesData[i]['key'],
-        'name': coursesData[i]['name'],
-        'duration': coursesData[i]['duration'],
-        'image': coursesData[i]['image'],
-        'detail': coursesData[i]['detail'],
-      });
-    }
-    print('All courses pushed to Firebase successfully!');
-  } catch (err) {
-    _showAlert('Error pushing courses to Firebase: $err');
-  }
-}
+// void _pushAllCoursesToFirebase() async {
+//   try {
+//     for (int i = 0; i < coursesData.length; i++) {
+//       await FirebaseFirestore.instance.collection('courses').add({
+//         'key': coursesData[i]['key'],
+//         'name': coursesData[i]['name'],
+//         'duration': coursesData[i]['duration'],
+//         'image': coursesData[i]['image'],
+//         'Introduction': coursesData[i]['Introduction'],
+//         'Keypoints': coursesData[i]['Keypoints'],
+//         'Explanation': coursesData[i]['Explanation'],
+//         'Applications': coursesData[i]['Applications'],
+//         'Challenges and Future': coursesData[i]['Challenges and Future'],
+//       });
+//     }
+//     print('All courses pushed to Firebase successfully!');
+//   } catch (err) {
+//     _showAlert('Error pushing courses to Firebase: $err');
+//   }
+// }
 
 
-  void fetchCourses() async {
+void fetchCourses() async {
   try {
     QuerySnapshot<Map<String, dynamic>> coursesSnapshot =
         await FirebaseFirestore.instance.collection('courses').get();
@@ -200,7 +81,11 @@ class _HomePageState extends State<HomePage> {
         'name': doc['name'] as String,
         'duration': doc['duration'] as String,
         'image': doc['image'] as String,
-        'detail': doc['detail'] as Map<String, dynamic>,
+        'Introduction': doc['Introduction'] as String,
+        'Keypoints': List<String>.from(doc['Keypoints'] as List<dynamic>),
+        'Explanation': doc['Explanation'] as String,
+        'Applications': List<String>.from(doc['Applications'] as List<dynamic>),
+        'Challenges and Future': doc['Challenges and Future'] as String,
       };
     }).toList();
     print('All courses fetched from Firebase successfully!');
@@ -212,6 +97,7 @@ class _HomePageState extends State<HomePage> {
     _showAlert(err.toString());
   }
 }
+
 
 
   void _showAlert(String message) {
@@ -266,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Text(
                                   'Welcome to GeekLearn',
-                                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   'Get ready to level up your knowledge',
@@ -316,13 +202,16 @@ class _HomePageState extends State<HomePage> {
                                 index < filteredCourses.length;
                                 index++)
                               CourseCard(
-                                courseName: filteredCourses[index]['name']!,
-                                courseDuration: filteredCourses[index]
-                                    ['duration']!,
-                                courseImage: filteredCourses[index]['image']!,
-                                courseKey: filteredCourses[index]['key']!,
-                                courseDetail: filteredCourses[index]['detail']!,
-                              ),
+                                  courseName: filteredCourses[index]['name']!,
+                                  courseDuration: filteredCourses[index]['duration']!,
+                                  courseImage: filteredCourses[index]['image']!,
+                                  courseKey: filteredCourses[index]['key']!,
+                                  introduction: filteredCourses[index]['Introduction']!,
+                                  keypoints: filteredCourses[index]['Keypoints']!,
+                                  explanation: filteredCourses[index]['Explanation']!,
+                                  applications: filteredCourses[index]['Applications']!,
+                                  challengesAndFuture: filteredCourses[index]['Challenges and Future']!,
+                                )
                           ],
                         )),
                     if (filteredCourses.isEmpty)
@@ -352,13 +241,20 @@ class _HomePageState extends State<HomePage> {
                               courseDuration: allCourses[i]['duration']!,
                               courseImage: allCourses[i]['image']!,
                               courseKey: allCourses[i]['key']!,
-                              courseDetail: allCourses[i]['detail']!,
+                              introduction: allCourses[i]['Introduction']!,
+                              keypoints: allCourses[i]['Keypoints']!,
+                              explanation: allCourses[i]['Explanation']!,
+                              applications: allCourses[i]['Applications']!,
+                              challengesAndFuture: allCourses[i]['Challenges and Future']!,
                             )
+
                         ],
                       ),
                     ),
+                    
                     IconButton(
                         onPressed: () async {
+                          // _pushAllCoursesToFirebase();
                           FirebaseAuth.instance.signOut();
                         },
                         icon: Icon(Icons.logout))

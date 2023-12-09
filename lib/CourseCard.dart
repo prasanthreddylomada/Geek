@@ -6,14 +6,22 @@ class CourseCard extends StatelessWidget {
   final String courseDuration;
   final String courseImage;
   final String courseKey;
-  final Map<String, dynamic> courseDetail;
+  final String introduction;
+  final List<String> keypoints;
+  final String explanation;
+  final List<String> applications;
+  final String challengesAndFuture;
 
   CourseCard({
     required this.courseName,
     required this.courseDuration,
     required this.courseImage,
     required this.courseKey,
-    required this.courseDetail,
+    required this.introduction,
+    required this.keypoints,
+    required this.explanation,
+    required this.applications,
+    required this.challengesAndFuture,
   });
 
   @override
@@ -28,7 +36,11 @@ class CourseCard extends StatelessWidget {
               courseName: courseName,
               courseDuration: courseDuration,
               courseImage: courseImage,
-              courseDetail: courseDetail,
+              introduction: introduction,
+              keypoints: keypoints,
+              explanation: explanation,
+              applications: applications,
+              challengesAndFuture: challengesAndFuture,
               courseKey: courseKey,
             ),
           ),
